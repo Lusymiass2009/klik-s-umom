@@ -1,0 +1,80 @@
+let i = 0;
+let score = 0;
+
+const quiz = [
+{
+q: "Тебе пришла ссылка от друга: 'Проголосуй за меня'",
+a: [
+["Перейти", 0, "Фишинг — опасно"],
+["Спросить друга", 1, "Правильно"],
+["Игнорировать", 1, "Безопасно"]
+]
+},
+{
+q: "Тебе звонят из банка и просят код из SMS",
+a: [
+["Сказать код", 0, "Никогда нельзя"],
+["Сбросить звонок", 1, "Верно"],
+["Обсудить", 0, "Риск мошенников"]
+]
+},
+{
+q: "Какой пароль надёжный?",
+a: [
+["123456", 0],
+["qwerty", 0],
+["A9!xP2@z", 1]
+]
+}
+];
+
+function start() {
+document.getElementById("start").classList.remove("active");
+document.getElementById("quiz").classList.add("active");
+show();
+}
+
+function show() {
+if (i >= quiz.length) return result();
+
+document.getElementById("q").innerText = quiz[i].q;
+document.getElementById("progress").innerText = (i+1) + " / " + quiz.length;
+
+let a = document.getElementById("answers");
+a.innerHTML = "";
+
+quiz[i].a.forEach(x => {
+let b = document.createElement("button");
+b.innerText = x[0];
+
+b.onclick = () => {
+score += x[1];
+document.getElementById("hint").innerText = x[2] || "";
+i++;
+setTimeout(show, 800);
+};
+
+a.appendChild(b);
+});
+}
+
+function result() {
+document.getElementById("quiz").classList.remove("active");
+document.getElementById("result").classList.add("active");
+
+let percent = Math.round(score / quiz.length * 100);
+
+document.getElementById("score").innerText =
+"Индекс безопасности: " + percent + "%";
+
+document.getElementById("title").innerText =
+percent >= 70 ? "Киберзащитник 🛡" : "Новичок ⚠";
+}
+
+function cert() {
+const blob = new Blob(["Клик с умом - сертификат"], {type:"text/plain"});
+const a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "certificate.txt";
+a.click();
+}
