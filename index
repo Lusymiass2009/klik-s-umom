@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Клик с умом</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="screen active" id="start">
+    <div class="card">
+        <div class="logo">🛡</div>
+        <h1>Клик с умом</h1>
+        <p>Интерактивный тренажёр цифровой безопасности</p>
+
+        <button onclick="start()">Начать миссию</button>
+    </div>
+</div>
+
+<div class="screen" id="quiz">
+    <div class="card">
+
+        <div id="progress">1 / 5</div>
+
+        <h2 id="q"></h2>
+
+        <div id="answers"></div>
+
+        <p id="hint"></p>
+
+    </div>
+</div>
+
+<div class="screen" id="result">
+    <div class="card">
+        <div class="logo">🏆</div>
+        <h1 id="title"></h1>
+        <p id="score"></p>
+
+        <button onclick="cert()">Скачать сертификат</button>
+        <button onclick="location.reload()">Заново</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
